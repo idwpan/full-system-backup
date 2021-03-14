@@ -1,5 +1,5 @@
 # Full System Backup
-For every linux geek who can't stop tinkering his system, can't  
+For every linux geek who can't stop tinkering the system, can't  
 stop cleaning it and do all the house keeping to make it the best,  
 this repo is for you.  
 I just created rsync and few commad line tools wrraper program that can  
