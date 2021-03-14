@@ -1,19 +1,9 @@
-/*
-*This header contains all required functions to manage configuration files.
-*/ 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include "errors.h" //Header for error handling
 
-//Functions prototype
-int check_file_existence(char *);
-void create_config_file(char *, const char*);
-void write_config_unit(char *, const char *, const char *);
-char *read_config_unit(char *, const char *);
-int check_unit_existence(const char *, char *);
-void read_reg_syntax(char *, char *, int);
-int read_list_syntax(char *, char *, int);
+#include "config_man.h"
 
 /*
 *The function will check if the given file in the 
@@ -155,6 +145,8 @@ char *read_config_unit(char *file_path, const char *unit_name) {
 
 	fclose(fp);
 	handle_strstr_error("An error occurred in read_config_file() while serching for unit:", unit_name);
+
+   return NULL;
 }
 
 /*

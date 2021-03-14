@@ -9,17 +9,17 @@
 *following path: ~/.config/sys_backup
 */
 
+// to get warnings about using localtime_r to go away
+#define _POSIX_C_SOURCE 200112L
+
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
 #include <string.h>
-//For config files managment which also includes error handling header
-#include "config_man.h"
 
-void delete_dirs(char *);
-void get_date(int *);
-char *make_backup_dir(char *, int *);
-void backup_sys(char *);
+#include "config_man.h"
+#include "errors.h"
+#include "sys_backup.h"
 
 int main() {
 	const char *config_desc = {
@@ -51,17 +51,23 @@ int main() {
 
 	/*Get configuration's file path*/
 	home = getenv("HOME"); //Get home path 
+
 	//Check for overflow 
 	check_input_size(sizeof(config_full_path), strlen(home)+strlen(config_path), "sys_backup.c -> main()");
 	strcpy(config_full_path, home);
 	strcat(config_full_path, config_path);
+
 	if(check_file_existence(config_full_path) == 0) { //Check if config file exists
 		create_config_file(config_full_path, config_desc);
+
 		for(i=0; i<3; i++)
 			write_config_unit(config_full_path, *(units_list+i), *(units_desc+i));
+
 		printf("Please configure the prorgram's config file in the following path: %s\n", config_full_path);
+
 		return 0;
 	}
+
 	/*Read the configured units*/
 	while(i<3) {
 		configurations = read_config_unit(config_full_path, *(units_list+i));
@@ -134,10 +140,12 @@ char *make_backup_dir(char *device_path, int *date_array) {
 	sprintf(dir_name, "%02d", *date_array);
 	sprintf(dir_name+6, "%d", *(date_array+2));
 	dir_name[2] = dir_name[5] = '-';
+
 	//Check for overflow
 	check_input_size(sizeof(backup_path), strlen(device_path)+strlen(dir_name), "sys_backup.c -> make_backup_dir()");
 	strcpy(backup_path, device_path);
 	strcat(backup_path, dir_name); //Complete the full dir path 
+
 	//Check for overflow
 	check_input_size(sizeof(full_command), strlen(command)+strlen(backup_path), "sys_backup.c -> make_backup_dir()");
 	strcpy(full_command, command); //Insert command to the full_command
