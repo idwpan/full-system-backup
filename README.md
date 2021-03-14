@@ -24,9 +24,9 @@ You can install these packages using your distribution's package manager.
 
 	```sudo gcc -o /usr/local/bin/sys_backup sys_backup.c```
 
-4. Run the program from terminal -using the name you chose to compile it with-,  
-it'll create a configuration file in the .config directory.
-Configure it to your needs and prefrences -all instructions are written  
-in the configuration file-, then make sure that the storage device is mounted, run  
-the program one more time and it should create a backup directory in storage device  
-and then backup all your system there. 
+4. Run the program from terminal -using the name you chose to compile it with-.  
+It'll create a configuration file in the ~/.config with the name sys_backup.
+Configure it to your needs and prefrences -all instructions are written there.  
+Then make sure that the storage device is mounted, run the program one more time,  
+it should execute and do all the cleaning process, create a backup directory  
+in storage device then backup it'll all your system there. 
