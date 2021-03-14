@@ -63,7 +63,7 @@ int main() {
 		return 0;
 	}
 	/*Read the configured units*/
-	for(i=0; i<3; i++) {
+	while(i<3) {
 		configurations = read_config_unit(config_full_path, *(units_list+i));
 		switch(i) {
 			/*System Cleaning*/
@@ -80,6 +80,7 @@ int main() {
 				backup_sys(backup_path); //Backup system in the created dir
 				break;
 		}
+		i++;
 	}
 	return 0;
 }

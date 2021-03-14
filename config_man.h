@@ -11,7 +11,7 @@ int check_file_existence(char *);
 void create_config_file(char *, const char*);
 void write_config_unit(char *, const char *, const char *);
 char *read_config_unit(char *, const char *);
-char *check_unit_existence(const char *, char *);
+int check_unit_existence(const char *, char *);
 void read_reg_syntax(char *, char *, int);
 int read_list_syntax(char *, char *, int);
 
@@ -136,7 +136,7 @@ char *read_config_unit(char *file_path, const char *unit_name) {
 			return read_configs;
 		}
 		else {
-			if(check_unit_existence(unit_name, unit_buffer) == NULL)  //If unit wasnt found in line
+			if(check_unit_existence(unit_name, unit_buffer))  //If unit wasnt found in line
 				continue; //Read the next one 
 			/*The address of the beginning of the unit's configurations =
 			beginning of the line + len of the unit name + 3 bytes (2 spaces and '=' sign)*/
@@ -219,7 +219,7 @@ int read_list_syntax(char *line_beginning, char *configs_buffer, int buffer_size
 *the first word then it checks if the founded unit and the passed 
 *one are equal and the same.
 */
-char *check_unit_existence(const char *unit_name, char *line_begin) {
+int check_unit_existence(const char *unit_name, char *line_begin) {
 	unsigned int i;
 	char unit_to_check[50]; //Array for the unit name that needs to be checked
 
@@ -229,8 +229,8 @@ char *check_unit_existence(const char *unit_name, char *line_begin) {
 		check_input_size(sizeof(unit_to_check), i+1, "config_man.h -> check_unit_existence()"); 
 		unit_to_check[i] = *(line_begin+i);
 	}
-	if(strcmp(unit_name, unit_to_check) == 0) //If equal in size
-		return strstr(unit_name, unit_to_check); //Check if equal in content also
+	if(strcmp(unit_name, unit_to_check) == 0) //If equal 
+		return 0;
 	else //Not equal
-		return NULL;
+		return 1;
 }
