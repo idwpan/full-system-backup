@@ -57,13 +57,13 @@ int main() {
 	strcat(config_full_path, config_path);
 	if(check_file_existence(config_full_path) == 0) { //Check if config file exists
 		create_config_file(config_full_path, config_desc);
-		for(i=0; *(units_list+i)!="\0"; i++)
+		for(i=0; *(units_list+i)!='\0'; i++)
 			write_config_unit(config_full_path, *(units_list+i), *(units_desc+i));
 		printf("Please configure the prorgram's config file in the following path: %s\n", config_full_path);
 		return 0;
 	}
 	/*Read the configured units*/
-	for(i=0; *(units_list+i)!="\0"; i++) {
+	for(i=0; *(units_list+i)!='\0'; i++) {
 		configurations = read_config_unit(config_full_path, *(units_list+i));
 		switch(i) {
 			/*System Cleaning*/
