@@ -18,11 +18,11 @@ You can install these packages using your distribution's package manager.
 1. Make sure all the dependencies are installed, if not install them.  
 2. Clone this repo by typing:  
 
-	git clone https://github.com/yankh764/full-system-backup.git
+	```git clone https://github.com/yankh764/full-system-backup.git```
 
 3. Move to the cloned directory and compile this program using gcc. For example:
 
-	sudo gcc -o /usr/local/bin/sys_backup sys_backup.c
+	```sudo gcc -o /usr/local/bin/sys_backup sys_backup.c```
 
 4. Run the program the terminal, it'll create a configuration file in the .config  
 directory. Configure it to your needs and prefrences -all instructions are written  
